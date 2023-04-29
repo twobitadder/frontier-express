@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://chvxtmhnktsv2"]
+
+[ext_resource type="Texture2D" uid="uid://kbr7ty0b2hqf" path="res://Assets/SpaceShooter/SpaceShooterAssetPack_Ships.png" id="1_adnhp"]
+[ext_resource type="Script" path="res://Objects/Player/player.gd" id="1_utk53"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_etokd"]
+radius = 3.0
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_utk53")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+rotation = 1.5708
+texture = ExtResource("1_adnhp")
+hframes = 10
+vframes = 10
+frame = 21
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_etokd")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Indicators" type="Node2D" parent="."]
+
+[node name="LoadProgress" type="ProgressBar" parent="."]
+visible = false
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = -7.0
+show_percentage = false
+
+[connection signal="value_changed" from="LoadProgress" to="." method="_on_load_progress_value_changed"]

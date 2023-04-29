@@ -1,0 +1,435 @@
+[gd_scene load_steps=35 format=3 uid="uid://mayu14a6yvv0"]
+
+[ext_resource type="Script" path="res://Abstract/UI/game_hud.gd" id="1_lg0k4"]
+[ext_resource type="Texture2D" uid="uid://41sgeldap4kk" path="res://Assets/SpaceShooter/SpaceShooterAssetPack_IU.png" id="3_6x6o2"]
+[ext_resource type="Texture2D" uid="uid://dkvs2ui3ssiet" path="res://Assets/SpaceShooter/SpaceShooterAssetPack_Characters.png" id="4_hhmm5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wuaqs"]
+atlas = ExtResource("3_6x6o2")
+region = Rect2(88, 0, 12, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_enivi"]
+atlas = ExtResource("3_6x6o2")
+region = Rect2(125, 0, 12, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l5cni"]
+atlas = ExtResource("4_hhmm5")
+region = Rect2(9, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pybqm"]
+atlas = ExtResource("4_hhmm5")
+region = Rect2(17, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oxe57"]
+atlas = ExtResource("4_hhmm5")
+region = Rect2(25, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wka8d"]
+atlas = ExtResource("4_hhmm5")
+region = Rect2(33, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7jnwr"]
+atlas = ExtResource("4_hhmm5")
+region = Rect2(9, 16, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rh62v"]
+atlas = ExtResource("4_hhmm5")
+region = Rect2(17, 16, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s0ai5"]
+atlas = ExtResource("4_hhmm5")
+region = Rect2(25, 16, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3gjn"]
+atlas = ExtResource("4_hhmm5")
+region = Rect2(33, 16, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cq05d"]
+atlas = ExtResource("4_hhmm5")
+region = Rect2(9, 64, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hnnb3"]
+atlas = ExtResource("4_hhmm5")
+region = Rect2(17, 64, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xw02e"]
+atlas = ExtResource("4_hhmm5")
+region = Rect2(25, 64, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmn2l"]
+atlas = ExtResource("4_hhmm5")
+region = Rect2(33, 64, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqnuq"]
+atlas = ExtResource("4_hhmm5")
+region = Rect2(9, 80, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cqind"]
+atlas = ExtResource("4_hhmm5")
+region = Rect2(17, 80, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6u3gs"]
+atlas = ExtResource("4_hhmm5")
+region = Rect2(25, 80, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mqfu8"]
+atlas = ExtResource("4_hhmm5")
+region = Rect2(33, 80, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jyqg8"]
+atlas = ExtResource("4_hhmm5")
+region = Rect2(9, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r13ei"]
+atlas = ExtResource("4_hhmm5")
+region = Rect2(17, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4nymk"]
+atlas = ExtResource("4_hhmm5")
+region = Rect2(25, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uy68e"]
+atlas = ExtResource("4_hhmm5")
+region = Rect2(33, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_weqnh"]
+atlas = ExtResource("4_hhmm5")
+region = Rect2(9, 32, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o4wut"]
+atlas = ExtResource("4_hhmm5")
+region = Rect2(17, 32, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0cb06"]
+atlas = ExtResource("4_hhmm5")
+region = Rect2(25, 32, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o1d2h"]
+atlas = ExtResource("4_hhmm5")
+region = Rect2(33, 32, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ml6f1"]
+atlas = ExtResource("4_hhmm5")
+region = Rect2(9, 72, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_spqpo"]
+atlas = ExtResource("4_hhmm5")
+region = Rect2(17, 72, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_foq4s"]
+atlas = ExtResource("4_hhmm5")
+region = Rect2(25, 72, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khs0l"]
+atlas = ExtResource("4_hhmm5")
+region = Rect2(33, 72, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n446c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l5cni")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pybqm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oxe57")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wka8d")
+}],
+"loop": true,
+"name": &"Cornucopia",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7jnwr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rh62v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s0ai5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o3gjn")
+}],
+"loop": true,
+"name": &"FirePearl",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cq05d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hnnb3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xw02e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gmn2l")
+}],
+"loop": true,
+"name": &"Foundation",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nqnuq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cqind")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6u3gs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mqfu8")
+}],
+"loop": true,
+"name": &"HarvardsEnd",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jyqg8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r13ei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4nymk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uy68e")
+}],
+"loop": true,
+"name": &"ShipBoard",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_weqnh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o4wut")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0cb06")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o1d2h")
+}],
+"loop": true,
+"name": &"Taxila",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ml6f1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_spqpo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_foq4s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_khs0l")
+}],
+"loop": true,
+"name": &"Vesper",
+"speed": 4.0
+}]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_lg0k4")
+
+[node name="JobsList" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+process_mode = 1
+custom_minimum_size = Vector2(110, 200)
+offset_right = 100.0
+offset_bottom = 200.0
+size_flags_horizontal = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="JobsList"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="JobsList/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="JobListings" type="VBoxContainer" parent="JobsList/HBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="JobsList/HBoxContainer/ScrollContainer/JobListings"]
+layout_mode = 2
+text = "Active Jobs"
+horizontal_alignment = 1
+
+[node name="ActiveJobs" type="Control" parent="JobsList/HBoxContainer/ScrollContainer/JobListings"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="JobsList/HBoxContainer/ScrollContainer/JobListings"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="JobsList/HBoxContainer/ScrollContainer/JobListings"]
+layout_mode = 2
+text = "Requests"
+horizontal_alignment = 1
+
+[node name="PendingJobs" type="Control" parent="JobsList/HBoxContainer/ScrollContainer/JobListings"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="JobsTextPlaceholder" type="Control" parent="JobsList/HBoxContainer"]
+custom_minimum_size = Vector2(16.679, 0)
+layout_mode = 2
+
+[node name="JobsLabel" type="Label" parent="JobsList/HBoxContainer/JobsTextPlaceholder"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 20.0
+offset_top = 5.191
+offset_right = 44.0
+offset_bottom = 200.191
+rotation = 1.5708
+size_flags_vertical = 1
+text = "Jobs"
+
+[node name="PauseMenu" type="CenterContainer" parent="."]
+process_mode = 2
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PauseMenu/VBoxContainer"]
+layout_mode = 2
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="Resume" type="Button" parent="PauseMenu/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+text = "Resume"
+
+[node name="Quit" type="Button" parent="PauseMenu/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+text = "Quit"
+
+[node name="PlayerInfo" type="HBoxContainer" parent="."]
+process_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -95.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="Money" type="Label" parent="PlayerInfo"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "$0"
+
+[node name="ShipStatus" type="PanelContainer" parent="PlayerInfo"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PlayerInfo/ShipStatus"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInfo/ShipStatus/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerInfo/ShipStatus/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PlayerInfo/ShipStatus/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_wuaqs")
+
+[node name="HealthProgress" type="ProgressBar" parent="PlayerInfo/ShipStatus/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+process_mode = 1
+custom_minimum_size = Vector2(75, 13)
+layout_mode = 2
+show_percentage = false
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PlayerInfo/ShipStatus/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PlayerInfo/ShipStatus/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_enivi")
+
+[node name="EnergyProgress" type="ProgressBar" parent="PlayerInfo/ShipStatus/MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+process_mode = 1
+custom_minimum_size = Vector2(75, 13)
+layout_mode = 2
+show_percentage = false
+
+[node name="Comms" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+process_mode = 1
+custom_minimum_size = Vector2(200, 50)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -209.0
+offset_top = -52.0
+offset_bottom = 0.45932
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Comms"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Comms/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Comms/HBoxContainer/Control"]
+position = Vector2(21.8379, 22.8379)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_n446c")
+animation = &"Vesper"
+autoplay = "Cornucopia"
+frame = 1
+frame_progress = 0.494444
+
+[node name="Label" type="Label" parent="Comms/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_vertical = 1
+autowrap_mode = 3
+
+[connection signal="pressed" from="PauseMenu/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="PauseMenu/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

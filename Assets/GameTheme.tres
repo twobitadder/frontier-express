@@ -1,0 +1,72 @@
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://blwikspljvnto"]
+
+[ext_resource type="Texture2D" uid="uid://41sgeldap4kk" path="res://Assets/SpaceShooter/SpaceShooterAssetPack_IU.png" id="1_d8fqt"]
+[ext_resource type="FontFile" uid="uid://bqi1cdmo3rdj5" path="res://Assets/ttf/monogram.ttf" id="2_yo70k"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fv2li"]
+texture = ExtResource("1_d8fqt")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+region_rect = Rect2(16, 48, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pm82v"]
+texture = ExtResource("1_d8fqt")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+region_rect = Rect2(0, 0, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_86fev"]
+texture = ExtResource("1_d8fqt")
+texture_margin_left = 2.0
+texture_margin_top = 2.29722
+texture_margin_right = 1.62157
+texture_margin_bottom = 2.29722
+region_rect = Rect2(0.5, 64, 14.5, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4qqc4"]
+texture = ExtResource("1_d8fqt")
+texture_margin_left = 2.16209
+texture_margin_top = 2.02696
+texture_margin_right = 2.16209
+texture_margin_bottom = 2.02696
+region_rect = Rect2(0, 48, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_af7nc"]
+texture = ExtResource("1_d8fqt")
+texture_margin_left = 2.16209
+texture_margin_top = 2.16209
+texture_margin_right = 2.29722
+texture_margin_bottom = 2.29722
+region_rect = Rect2(16, 0, 16, 16)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_41chc"]
+bg_color = Color(0.6, 0.529412, 0.223529, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vwvom"]
+bg_color = Color(0.0392157, 0.6, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[resource]
+default_font = ExtResource("2_yo70k")
+Button/styles/disabled = SubResource("StyleBoxTexture_fv2li")
+Button/styles/hover = SubResource("StyleBoxTexture_pm82v")
+Button/styles/normal = SubResource("StyleBoxTexture_86fev")
+Button/styles/pressed = SubResource("StyleBoxTexture_4qqc4")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_af7nc")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_41chc")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_vwvom")

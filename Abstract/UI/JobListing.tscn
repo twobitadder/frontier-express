@@ -1,0 +1,126 @@
+[gd_scene load_steps=6 format=3 uid="uid://c7y2eeng7rwuy"]
+
+[ext_resource type="Script" path="res://Abstract/UI/job_listing.gd" id="1_m3pn2"]
+[ext_resource type="Texture2D" uid="uid://bvn1sp8vbbmrl" path="res://Assets/Planets/dryhotplanet.png" id="2_frixg"]
+[ext_resource type="Texture2D" uid="uid://cmshkdtpm158s" path="res://Assets/Planets/dryvenuslikeplanet.png" id="3_1ybgb"]
+[ext_resource type="Texture2D" uid="uid://cfckyvuq16et4" path="res://Assets/SpaceShooter/SpaceShooterAssetPack_Miscellaneous.png" id="4_2antl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j382r"]
+atlas = ExtResource("4_2antl")
+region = Rect2(0, 8, 8, 8)
+
+[node name="Job" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_m3pn2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Origin" type="TextureRect" parent="HBoxContainer/CenterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_frixg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="OriginNumber" type="Label" parent="HBoxContainer/CenterContainer"]
+unique_name_in_owner = true
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "->"
+
+[node name="CenterContainer2" type="CenterContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Destination" type="TextureRect" parent="HBoxContainer/CenterContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = ExtResource("3_1ybgb")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DestinationNumber" type="Label" parent="HBoxContainer/CenterContainer2"]
+unique_name_in_owner = true
+self_modulate = Color(0.0627451, 0.0627451, 0.0627451, 1)
+layout_mode = 2
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SizeIndicator" type="VBoxContainer" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(5, 20)
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/SizeIndicator"]
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 2
+texture = SubResource("AtlasTexture_j382r")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/SizeIndicator"]
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 2
+texture = SubResource("AtlasTexture_j382r")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer/SizeIndicator"]
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 2
+texture = SubResource("AtlasTexture_j382r")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Payout" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "$0"
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+value = 11.78
+show_percentage = false
+
+[node name="StatusLabel" type="Label" parent="ProgressBar"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Accept? Y/N"
+horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
