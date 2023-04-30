@@ -15,6 +15,7 @@ var listing_scene = preload("res://Abstract/UI/JobListing.tscn")
 @onready var comms: PanelContainer = %Comms
 @onready var jobs_label: Label = %JobsLabel
 @onready var job_listings: VBoxContainer = %JobListings
+@onready var strikes_container: HBoxContainer = %StrikesContainer
 
 var pending_jobs_amt := 0
 var selected_job : JobListing
@@ -27,8 +28,18 @@ var jobs_positions := {"inactive" : Vector2(-100, 0),\
 						"active" : Vector2.ZERO}
 
 func _ready() -> void:
+	GameState.money_updated.connect(_on_money_updated)
+	GameState.strikes_updated.connect(_on_strikes_updated)
 	jobs_list.position = jobs_positions.inactive
 	comms.position = comms_positions.inactive
+
+func _on_money_updated(_money) -> void:
+	money.text = "$%s" % _money
+
+func _on_strikes_updated(strikes) -> void:
+	for child in strikes_container.get_children():
+		if child.get_index() >= strikes:
+			child.hide()
 
 func pause(state : bool) -> void:
 	get_tree().paused = state

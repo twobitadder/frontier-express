@@ -14,6 +14,10 @@ config/name="ldjam53-delivery"
 config/features=PackedStringArray("4.0", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameState="*res://Abstract/GameState.tscn"
+
 [display]
 
 window/size/viewport_width=320

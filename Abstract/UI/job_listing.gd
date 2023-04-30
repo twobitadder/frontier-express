@@ -25,6 +25,7 @@ func setup(_job) -> void:
 	destination.texture = load(job.destination.planet_image)
 	destination_number.text = "%s" % job.destination.planet_number
 	time_left = job.accept_time
+	job.listing = self
 	timer.start(time_left)
 
 func _ready() -> void:
@@ -41,6 +42,7 @@ func change_job_status(status : JobManager.STATUS) -> void:
 	match job.status:
 		JobManager.STATUS.REFUSED:
 			status_label.text = "Job declined!"
+			GameState.strikes -= 1
 			_on_timer_timeout()
 		JobManager.STATUS.ACTIVE:
 			status_label.text = "Pick up cargo!"
@@ -49,16 +51,22 @@ func change_job_status(status : JobManager.STATUS) -> void:
 			status_label.text = "Cargo on board!"
 		JobManager.STATUS.COMPLETED:
 			status_label.text = "Well done!"
+			GameState.money += job.payout
+			remove_from_board()
 
 func _on_timer_timeout() -> void:
 	match job.status:
 		JobManager.STATUS.PENDING:
 			job.status = JobManager.STATUS.IGNORED
 			status_label.text = "Timed out!"
+			GameState.strikes -= 2
 		JobManager.STATUS.ACTIVE:
 			job.status = JobManager.STATUS.EXPIRED
 			status_label.text = "Timed out!"
-	
+			GameState.strikes -= 2
+	remove_from_board()
+
+func remove_from_board() -> void:
 	await create_tween().tween_property(self, "position:x", -100.0, 1.5).set_trans(Tween.TRANS_ELASTIC).finished
 	job_ended.emit(job)
 	queue_free() 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://mayu14a6yvv0"]
+[gd_scene load_steps=36 format=3 uid="uid://mayu14a6yvv0"]
 
 [ext_resource type="Script" path="res://Abstract/UI/game_hud.gd" id="1_lg0k4"]
 [ext_resource type="Texture2D" uid="uid://41sgeldap4kk" path="res://Assets/SpaceShooter/SpaceShooterAssetPack_IU.png" id="3_6x6o2"]
@@ -11,6 +11,10 @@ region = Rect2(88, 0, 12, 13)
 [sub_resource type="AtlasTexture" id="AtlasTexture_enivi"]
 atlas = ExtResource("3_6x6o2")
 region = Rect2(125, 0, 12, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5bs4"]
+atlas = ExtResource("3_6x6o2")
+region = Rect2(40, 96, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l5cni"]
 atlas = ExtResource("4_hhmm5")
@@ -346,52 +350,88 @@ offset_left = -95.0
 offset_bottom = 40.0
 grow_horizontal = 0
 
-[node name="Money" type="Label" parent="PlayerInfo"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInfo"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerInfo/VBoxContainer"]
+layout_mode = 2
+
+[node name="Money" type="Label" parent="PlayerInfo/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
 text = "$0"
+horizontal_alignment = 2
+vertical_alignment = 1
 
-[node name="ShipStatus" type="PanelContainer" parent="PlayerInfo"]
+[node name="ShipStatus" type="PanelContainer" parent="PlayerInfo/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PlayerInfo/ShipStatus"]
+[node name="MarginContainer" type="MarginContainer" parent="PlayerInfo/VBoxContainer/HBoxContainer/ShipStatus"]
 layout_mode = 2
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInfo/ShipStatus/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerInfo/VBoxContainer/HBoxContainer/ShipStatus/MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerInfo/ShipStatus/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerInfo/VBoxContainer/HBoxContainer/ShipStatus/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="PlayerInfo/ShipStatus/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="PlayerInfo/VBoxContainer/HBoxContainer/ShipStatus/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_wuaqs")
 
-[node name="HealthProgress" type="ProgressBar" parent="PlayerInfo/ShipStatus/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="HealthProgress" type="ProgressBar" parent="PlayerInfo/VBoxContainer/HBoxContainer/ShipStatus/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 process_mode = 1
 custom_minimum_size = Vector2(75, 13)
 layout_mode = 2
 show_percentage = false
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PlayerInfo/ShipStatus/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="PlayerInfo/VBoxContainer/HBoxContainer/ShipStatus/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="PlayerInfo/ShipStatus/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="TextureRect" type="TextureRect" parent="PlayerInfo/VBoxContainer/HBoxContainer/ShipStatus/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_enivi")
 
-[node name="EnergyProgress" type="ProgressBar" parent="PlayerInfo/ShipStatus/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="EnergyProgress" type="ProgressBar" parent="PlayerInfo/VBoxContainer/HBoxContainer/ShipStatus/MarginContainer/VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
 process_mode = 1
 custom_minimum_size = Vector2(75, 13)
 layout_mode = 2
 show_percentage = false
+
+[node name="StrikesContainer" type="HBoxContainer" parent="PlayerInfo/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="PlayerInfo/VBoxContainer/StrikesContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_u5bs4")
+
+[node name="TextureRect2" type="TextureRect" parent="PlayerInfo/VBoxContainer/StrikesContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_u5bs4")
+
+[node name="TextureRect3" type="TextureRect" parent="PlayerInfo/VBoxContainer/StrikesContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_u5bs4")
+
+[node name="TextureRect4" type="TextureRect" parent="PlayerInfo/VBoxContainer/StrikesContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_u5bs4")
+
+[node name="TextureRect5" type="TextureRect" parent="PlayerInfo/VBoxContainer/StrikesContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_u5bs4")
 
 [node name="Comms" type="PanelContainer" parent="."]
 unique_name_in_owner = true

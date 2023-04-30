@@ -73,6 +73,7 @@ func change_loading_state(state) -> void:
 			_setup_loading()
 		STATE.IDLE:
 			_cancel_loading()
+			current_job = null
 	loading_state = state
 
 func _setup_loading() -> void:

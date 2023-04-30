@@ -4,6 +4,7 @@ extends Node
 signal new_job(job : Job)
 signal loading(jobs, state)
 signal job_failed(job : Job)
+signal job_completed(job : Job)
 
 enum STATUS { COMPLETED, PENDING, ACTIVE, TRANSIT, EXPIRED, REFUSED, IGNORED }
 
@@ -21,6 +22,7 @@ class Job:
 	var payout
 	var size
 	var status = STATUS.PENDING
+	var listing
 
 func _ready() -> void:
 	randomize()
@@ -70,6 +72,9 @@ func _on_job_ended(job) -> void:
 		STATUS.TRANSIT:
 			active_job_list.erase(job)
 			job_failed.emit(job)
+		STATUS.COMPLETED:
+			active_job_list.erase(job)
+			job_completed.emit(job)
 			
 
 func _on_job_accepted(job) -> void:
@@ -79,7 +84,7 @@ func _on_job_accepted(job) -> void:
 func _on_planet_approach(planet_name, approaching) -> void:
 	print("approaching")
 	if !approaching:
-		loading.emit([], approaching)
+		loading.emit([], planet_name, approaching)
 		return
 	
 	var relevant_jobs = active_job_list.filter(func(job): return job.origin.planet_name == planet_name || job.destination.planet_name == planet_name)
@@ -88,4 +93,9 @@ func _on_planet_approach(planet_name, approaching) -> void:
 		return
 	
 	loading.emit(relevant_jobs, planet_name, approaching)
-	
+
+func _on_load_complete(job) -> void:
+	if job.status == STATUS.ACTIVE:
+		job.listing.change_job_status(STATUS.TRANSIT)
+	elif job.status == STATUS.TRANSIT:
+		job.listing.change_job_status(STATUS.COMPLETED)
