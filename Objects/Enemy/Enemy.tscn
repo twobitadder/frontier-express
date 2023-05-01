@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://dy1gjr8fehd1c"]
+
+[ext_resource type="Script" path="res://Objects/Enemy/enemy.gd" id="1_ta20w"]
+[ext_resource type="Texture2D" uid="uid://kbr7ty0b2hqf" path="res://Assets/SpaceShooter/SpaceShooterAssetPack_Ships.png" id="1_yidog"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f0raq"]
+size = Vector2(7.25, 6.75)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j68ks"]
+radius = 141.004
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_540ho"]
+radius = 22.0227
+
+[node name="Enemy" type="Area2D" groups=["Enemies"]]
+collision_layer = 2
+script = ExtResource("1_ta20w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 4.71239
+texture = ExtResource("1_yidog")
+region_enabled = true
+region_rect = Rect2(49, 41, 6, 6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_f0raq")
+
+[node name="WeaponsRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponsRange"]
+shape = SubResource("CircleShape2D_j68ks")
+
+[node name="WeaponTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ProximityCheck" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProximityCheck"]
+shape = SubResource("CircleShape2D_540ho")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="WeaponsRange" to="." method="_on_weapons_range_body_entered"]
+[connection signal="body_exited" from="WeaponsRange" to="." method="_on_weapons_range_body_exited"]
+[connection signal="timeout" from="WeaponTimer" to="." method="_on_weapon_timer_timeout"]
+[connection signal="area_entered" from="ProximityCheck" to="." method="_on_proximity_check_area_entered"]
+[connection signal="area_exited" from="ProximityCheck" to="." method="_on_proximity_check_area_exited"]

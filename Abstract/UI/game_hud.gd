@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 signal job_created(listing)
+signal dialog_complete
 
 var listing_scene = preload("res://Abstract/UI/JobListing.tscn")
 
@@ -16,6 +17,9 @@ var listing_scene = preload("res://Abstract/UI/JobListing.tscn")
 @onready var jobs_label: Label = %JobsLabel
 @onready var job_listings: VBoxContainer = %JobListings
 @onready var strikes_container: HBoxContainer = %StrikesContainer
+@onready var cargo_container: HBoxContainer = %CargoContainer
+@onready var actor: AnimatedSprite2D = %Actor
+@onready var dialog: Label = %Dialog
 
 var pending_jobs_amt := 0
 var selected_job : JobListing
@@ -30,6 +34,8 @@ var jobs_positions := {"inactive" : Vector2(-100, 0),\
 func _ready() -> void:
 	GameState.money_updated.connect(_on_money_updated)
 	GameState.strikes_updated.connect(_on_strikes_updated)
+	GameState.new_dialog.connect(_on_dialog_request)
+	dialog_complete.connect(GameState._on_dialog_completed)
 	jobs_list.position = jobs_positions.inactive
 	comms.position = comms_positions.inactive
 
@@ -40,6 +46,13 @@ func _on_strikes_updated(strikes) -> void:
 	for child in strikes_container.get_children():
 		if child.get_index() >= strikes:
 			child.hide()
+
+func _on_cargo_changed(cargo) -> void:
+	for child in cargo_container.get_children():
+		if child.get_index() >= cargo:
+			child.modulate = Color.WHITE
+		else:
+			child.modulate = Color.BLACK
 
 func pause(state : bool) -> void:
 	get_tree().paused = state
@@ -105,3 +118,22 @@ func incoming_job(job) -> void:
 	tween.tween_property(jobs_label, "position:y", jobs_label.position.y + 5, 0.1).set_trans(Tween.TRANS_BOUNCE)
 	tween.tween_property(jobs_label, "position:y", jobs_label.position.y, 0.1).set_trans(Tween.TRANS_BOUNCE)
 	jobs_label.text = "Jobs (%s)" % pending_jobs_amt
+
+func _on_health_changed(value) -> void:
+	health_progress.value = value
+
+func _on_energy_changed(value) -> void:
+	energy_progress.value = value
+
+func _on_dialog_request(_actor, _dialog) -> void:
+	actor.play(GameState.actors["Harvard's End"])
+	await create_tween().tween_property(comms, "position", comms_positions.active, 0.5).set_trans(Tween.TRANS_CUBIC).finished
+	actor.play(_actor)
+	dialog.visible_ratio = 0.0
+	dialog.text = _dialog
+	await create_tween().tween_property(dialog, "visible_ratio", 1.0, 1.0).finished
+	await get_tree().create_timer(1.0).timeout
+	actor.play(GameState.actors["Harvard's End"])
+	await create_tween().tween_property(comms, "position", comms_positions.inactive, 0.5).set_trans(Tween.TRANS_CUBIC).finished
+	dialog.text = ""
+	dialog_complete.emit()

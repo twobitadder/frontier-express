@@ -6,6 +6,17 @@ signal loading(jobs, state)
 signal job_failed(job : Job)
 signal job_completed(job : Job)
 
+const deliver_request_bodies = [
+	"I need this sent to %s, ASAP!... /n... Please",
+	"I've got a vital shipment to %s for you, good luck!",
+	"Please ensure this gets to %s, they need it badly!",
+	"My cat is very lonely. Please deliver this care package to them on %s",
+	"I'm BORED so I'm MAILING SOMETHING please go to %s!!",
+	"You ever wondered what the point of life is? Anyway I need this to %s",
+	"Got this package due for %s, it's marked urgent!",
+	"If this doesn't get to %s it will be a catastrophe!!"
+]
+
 enum STATUS { COMPLETED, PENDING, ACTIVE, TRANSIT, EXPIRED, REFUSED, IGNORED }
 
 var planet_list : Array
@@ -33,8 +44,11 @@ func _ready() -> void:
 	
 	pending_job_list = Array()
 	active_job_list = Array()
+	
+	await get_tree().create_timer(3).timeout
+	create_job()
 
-func create_job() -> void:
+func create_job(origin = "", destination = "") -> void:
 	var job = Job.new()
 	var origin_ind = randi_range(0, planet_list.size() - 1)
 	var dest_ind = origin_ind
@@ -47,13 +61,14 @@ func create_job() -> void:
 	job.completion_time = 240
 	job.accept_time = 10
 	job.payout = 200
-	job.size = 1
+	job.size = 3
 	
 	pending_job_list.append(job)
 	job_id_counter += 1
 	new_job.emit(job)
 
 func _on_timer_timeout() -> void:
+	GameState.dialog_request(GameState.actors.ShipBoard, "New job pending")
 	create_job()
 
 func _on_new_job_listing(listing) -> void:
@@ -80,9 +95,13 @@ func _on_job_ended(job) -> void:
 func _on_job_accepted(job) -> void:
 	pending_job_list.erase(job)
 	active_job_list.append(job)
+	build_dialog_request(job)
+
+func build_dialog_request(job) -> void:
+	var dialog = deliver_request_bodies[randi() % deliver_request_bodies.size()] % job.destination.planet_name
+	GameState.dialog_request(GameState.actors[job.origin.planet_name], dialog)
 
 func _on_planet_approach(planet_name, approaching) -> void:
-	print("approaching")
 	if !approaching:
 		loading.emit([], planet_name, approaching)
 		return

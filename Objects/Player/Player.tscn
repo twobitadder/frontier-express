@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://chvxtmhnktsv2"]
+[gd_scene load_steps=7 format=3 uid="uid://chvxtmhnktsv2"]
 
 [ext_resource type="Texture2D" uid="uid://kbr7ty0b2hqf" path="res://Assets/SpaceShooter/SpaceShooterAssetPack_Ships.png" id="1_adnhp"]
 [ext_resource type="Script" path="res://Objects/Player/player.gd" id="1_utk53"]
@@ -6,7 +6,38 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_etokd"]
 radius = 3.0
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_63fcq"]
+lifetime_randomness = 0.89
+emission_shape = 1
+emission_sphere_radius = 1.0
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+spread = 15.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 15.0
+initial_velocity_max = 20.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6bx0d"]
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 1.0
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+spread = 15.0
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+color = Color(0, 0.921569, 1, 1)
+hue_variation_min = -0.05
+hue_variation_max = 0.05
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fssvm"]
+size = Vector2(181, 31)
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["Player"]]
+collision_mask = 3
 script = ExtResource("1_utk53")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -24,7 +55,9 @@ shape = SubResource("CircleShape2D_etokd")
 
 [node name="Indicators" type="Node2D" parent="."]
 
-[node name="LoadProgress" type="ProgressBar" parent="."]
+[node name="LoadIndicatorRotation" type="Node2D" parent="."]
+
+[node name="LoadProgress" type="ProgressBar" parent="LoadIndicatorRotation"]
 visible = false
 offset_left = -10.0
 offset_top = -10.0
@@ -32,4 +65,30 @@ offset_right = 10.0
 offset_bottom = -7.0
 show_percentage = false
 
-[connection signal="value_changed" from="LoadProgress" to="." method="_on_load_progress_value_changed"]
+[node name="ThrustParticles" type="Node2D" parent="."]
+position = Vector2(-3, 0)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="ThrustParticles"]
+position = Vector2(-1, 0)
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_63fcq")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="ThrustParticles"]
+z_index = -1
+position = Vector2(-1, 0)
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_6bx0d")
+lifetime = 0.1
+
+[node name="ShootTimer" type="Timer" parent="."]
+
+[node name="AimHelper" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AimHelper"]
+position = Vector2(91.5, -0.5)
+shape = SubResource("RectangleShape2D_fssvm")
+
+[connection signal="value_changed" from="LoadIndicatorRotation/LoadProgress" to="." method="_on_load_progress_value_changed"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="area_entered" from="AimHelper" to="." method="_on_aim_helper_area_entered"]
+[connection signal="area_exited" from="AimHelper" to="." method="_on_aim_helper_area_exited"]

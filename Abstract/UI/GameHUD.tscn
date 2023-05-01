@@ -1,7 +1,8 @@
-[gd_scene load_steps=36 format=3 uid="uid://mayu14a6yvv0"]
+[gd_scene load_steps=38 format=3 uid="uid://mayu14a6yvv0"]
 
 [ext_resource type="Script" path="res://Abstract/UI/game_hud.gd" id="1_lg0k4"]
 [ext_resource type="Texture2D" uid="uid://41sgeldap4kk" path="res://Assets/SpaceShooter/SpaceShooterAssetPack_IU.png" id="3_6x6o2"]
+[ext_resource type="Texture2D" uid="uid://cfckyvuq16et4" path="res://Assets/SpaceShooter/SpaceShooterAssetPack_Miscellaneous.png" id="3_pcrjr"]
 [ext_resource type="Texture2D" uid="uid://dkvs2ui3ssiet" path="res://Assets/SpaceShooter/SpaceShooterAssetPack_Characters.png" id="4_hhmm5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wuaqs"]
@@ -11,6 +12,10 @@ region = Rect2(88, 0, 12, 13)
 [sub_resource type="AtlasTexture" id="AtlasTexture_enivi"]
 atlas = ExtResource("3_6x6o2")
 region = Rect2(125, 0, 12, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwuq0"]
+atlas = ExtResource("3_pcrjr")
+region = Rect2(0.111183, 7.47386, 7.9727, 8.37809)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u5bs4"]
 atlas = ExtResource("3_6x6o2")
@@ -392,6 +397,7 @@ unique_name_in_owner = true
 process_mode = 1
 custom_minimum_size = Vector2(75, 13)
 layout_mode = 2
+value = 100.0
 show_percentage = false
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="PlayerInfo/VBoxContainer/HBoxContainer/ShipStatus/MarginContainer/VBoxContainer"]
@@ -406,30 +412,64 @@ unique_name_in_owner = true
 process_mode = 1
 custom_minimum_size = Vector2(75, 13)
 layout_mode = 2
+max_value = 1000.0
+value = 1000.0
 show_percentage = false
 
-[node name="StrikesContainer" type="HBoxContainer" parent="PlayerInfo/VBoxContainer"]
-unique_name_in_owner = true
+[node name="HBoxContainer2" type="HBoxContainer" parent="PlayerInfo/VBoxContainer"]
 layout_mode = 2
 alignment = 2
 
-[node name="TextureRect" type="TextureRect" parent="PlayerInfo/VBoxContainer/StrikesContainer"]
+[node name="CargoContainer" type="HBoxContainer" parent="PlayerInfo/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="PlayerInfo/VBoxContainer/HBoxContainer2/CargoContainer"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+texture = SubResource("AtlasTexture_fwuq0")
+
+[node name="TextureRect2" type="TextureRect" parent="PlayerInfo/VBoxContainer/HBoxContainer2/CargoContainer"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+texture = SubResource("AtlasTexture_fwuq0")
+
+[node name="TextureRect3" type="TextureRect" parent="PlayerInfo/VBoxContainer/HBoxContainer2/CargoContainer"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+texture = SubResource("AtlasTexture_fwuq0")
+
+[node name="TextureRect4" type="TextureRect" parent="PlayerInfo/VBoxContainer/HBoxContainer2/CargoContainer"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+texture = SubResource("AtlasTexture_fwuq0")
+
+[node name="StrikesContainer" type="HBoxContainer" parent="PlayerInfo/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="PlayerInfo/VBoxContainer/HBoxContainer2/StrikesContainer"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_u5bs4")
 
-[node name="TextureRect2" type="TextureRect" parent="PlayerInfo/VBoxContainer/StrikesContainer"]
+[node name="TextureRect2" type="TextureRect" parent="PlayerInfo/VBoxContainer/HBoxContainer2/StrikesContainer"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_u5bs4")
 
-[node name="TextureRect3" type="TextureRect" parent="PlayerInfo/VBoxContainer/StrikesContainer"]
+[node name="TextureRect3" type="TextureRect" parent="PlayerInfo/VBoxContainer/HBoxContainer2/StrikesContainer"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_u5bs4")
 
-[node name="TextureRect4" type="TextureRect" parent="PlayerInfo/VBoxContainer/StrikesContainer"]
+[node name="TextureRect4" type="TextureRect" parent="PlayerInfo/VBoxContainer/HBoxContainer2/StrikesContainer"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_u5bs4")
 
-[node name="TextureRect5" type="TextureRect" parent="PlayerInfo/VBoxContainer/StrikesContainer"]
+[node name="TextureRect5" type="TextureRect" parent="PlayerInfo/VBoxContainer/HBoxContainer2/StrikesContainer"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_u5bs4")
 
@@ -456,7 +496,8 @@ layout_mode = 2
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Comms/HBoxContainer/Control"]
+[node name="Actor" type="AnimatedSprite2D" parent="Comms/HBoxContainer/Control"]
+unique_name_in_owner = true
 position = Vector2(21.8379, 22.8379)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_n446c")
@@ -465,7 +506,8 @@ autoplay = "Cornucopia"
 frame = 1
 frame_progress = 0.494444
 
-[node name="Label" type="Label" parent="Comms/HBoxContainer"]
+[node name="Dialog" type="Label" parent="Comms/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_vertical = 1

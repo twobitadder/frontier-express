@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dsth32c8m3wfn"]
+[gd_scene load_steps=16 format=3 uid="uid://dsth32c8m3wfn"]
 
 [ext_resource type="Texture2D" uid="uid://cnl3gmpqlsfbk" path="res://Assets/SpaceShooter/stars.png" id="1_kf1oi"]
 [ext_resource type="PackedScene" uid="uid://dufidm0akarj" path="res://World/Nebula.tscn" id="1_nlnsm"]
@@ -7,7 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://dle8ufef4ag24" path="res://Objects/Planet/Planet.tscn" id="4_m6mce"]
 [ext_resource type="Texture2D" uid="uid://qqug1ydxmiw2" path="res://Assets/Planets/sun.png" id="5_r77gi"]
 [ext_resource type="PackedScene" uid="uid://mayu14a6yvv0" path="res://Abstract/UI/GameHUD.tscn" id="5_xkp8x"]
+[ext_resource type="Script" path="res://Objects/Planet/sun.gd" id="6_smwld"]
+[ext_resource type="Texture2D" uid="uid://cfckyvuq16et4" path="res://Assets/SpaceShooter/SpaceShooterAssetPack_Miscellaneous.png" id="8_1kaql"]
 [ext_resource type="PackedScene" uid="uid://cba0eqpebkowh" path="res://Abstract/JobManager.tscn" id="8_hugnl"]
+[ext_resource type="PackedScene" uid="uid://dqbxcds1q41iq" path="res://Abstract/EnemyManager.tscn" id="9_nw88s"]
+[ext_resource type="Script" path="res://Abstract/enemy_spawn_containers.gd" id="12_nyd7b"]
 
 [sub_resource type="Gradient" id="Gradient_sibtq"]
 interpolation_mode = 2
@@ -72,26 +76,33 @@ z_index = -1
 
 [node name="Sun" parent="PlanetaryBodies" instance=ExtResource("4_m6mce")]
 position = Vector2(1000, 1000)
-rotation = 29.5779
 scale = Vector2(1.5, 1.5)
-planet_image = "res://Assets/Planets/sun.png"
-planet_name = "Sun"
-orbit_speed = 0.0
+script = ExtResource("6_smwld")
 
 [node name="Area2D" parent="PlanetaryBodies/Sun" index="0"]
 rotation = 1.83798
+collision_mask = 3
 
 [node name="Sprite2D" parent="PlanetaryBodies/Sun/Area2D" index="0"]
+rotation = -0.837758
 scale = Vector2(1, 1)
 texture = ExtResource("5_r77gi")
 
 [node name="CollisionShape2D" parent="PlanetaryBodies/Sun/Area2D" index="1"]
 shape = SubResource("CircleShape2D_58rfq")
 
+[node name="Sprite2D2" type="Sprite2D" parent="PlanetaryBodies/Sun/Area2D" index="2"]
+self_modulate = Color(1, 0.501961, 0.137255, 0.32549)
+scale = Vector2(33.965, 33.965)
+texture = ExtResource("8_1kaql")
+region_enabled = true
+region_rect = Rect2(88, 32, 16, 16)
+
 [node name="FirePearl" parent="PlanetaryBodies/Sun" instance=ExtResource("4_m6mce")]
 scale = Vector2(0.666667, 0.666667)
 planet_image = "res://Assets/Planets/dryhotplanet.png"
 planet_name = "Fire Pearl"
+orbit_speed = 0.1
 planet_number = 1
 orbit_length = 550.0
 
@@ -99,7 +110,7 @@ orbit_length = 550.0
 scale = Vector2(0.666667, 0.666667)
 planet_image = "res://Assets/Planets/dryvenuslikeplanet.png"
 planet_name = "Taxila"
-orbit_speed = 0.1
+orbit_speed = 0.075
 planet_number = 2
 orbit_length = 650.0
 
@@ -137,5 +148,29 @@ orbit_length = 1400.0
 [node name="CanvasLayer" parent="." instance=ExtResource("5_xkp8x")]
 
 [node name="JobManager" parent="." instance=ExtResource("8_hugnl")]
+
+[node name="EnemyManager" parent="." instance=ExtResource("9_nw88s")]
+
+[node name="BulletContainer" type="Node2D" parent="." groups=["BulletContainer"]]
+
+[node name="EnemyContainer" type="Node2D" parent="." groups=["EnemyContainer"]]
+
+[node name="EnemySpawnContainers" type="Node2D" parent="."]
+position = Vector2(1000, 1000)
+script = ExtResource("12_nyd7b")
+
+[node name="Node2D" type="Node2D" parent="EnemySpawnContainers" groups=["EnemySpawner"]]
+position = Vector2(2000, 0)
+
+[node name="Node2D2" type="Node2D" parent="EnemySpawnContainers" groups=["EnemySpawner"]]
+position = Vector2(-2000, 0)
+
+[node name="Node2D3" type="Node2D" parent="EnemySpawnContainers" groups=["EnemySpawner"]]
+position = Vector2(0, 2000)
+
+[node name="Node2D4" type="Node2D" parent="EnemySpawnContainers" groups=["EnemySpawner"]]
+position = Vector2(0, -2000)
+
+[connection signal="area_entered" from="PlanetaryBodies/Sun/Area2D" to="PlanetaryBodies/Sun" method="_on_area_2d_area_entered"]
 
 [editable path="PlanetaryBodies/Sun"]
