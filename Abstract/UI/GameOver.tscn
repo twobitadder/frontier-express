@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=3 uid="uid://oumreupkbc4a"]
+
+[ext_resource type="Script" path="res://Abstract/UI/game_over.gd" id="1_rmn4e"]
+[ext_resource type="FontFile" uid="uid://bfr6jp74u3gpi" path="res://Assets/ttf/SuperTechnology.ttf" id="1_xpfcj"]
+
+[node name="GameOver" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+script = ExtResource("1_rmn4e")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_xpfcj")
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="EndingSummary" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "You amassed a bajillion dollars because you're the best but you died forever and that's sad :(((("
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Retry" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Try Again"
+
+[node name="MainMenu" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Exit Game"
+
+[connection signal="pressed" from="VBoxContainer/Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

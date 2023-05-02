@@ -10,21 +10,22 @@ config_version=5
 
 [application]
 
-config/name="ldjam53-delivery"
-run/main_scene="res://World/SolarSystem.tscn"
+config/name="Frontier Express"
+run/main_scene="res://Abstract/UI/MainMenu.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]
 
 GameState="*res://Abstract/GameState.tscn"
+SceneHandler="*res://Abstract/scene_handler.tscn"
 
 [display]
 
 window/size/viewport_width=320
 window/size/viewport_height=240
-window/size/window_width_override=1280
-window/size/window_height_override=960
+window/size/window_width_override=960
+window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 
 [gui]
@@ -73,8 +74,14 @@ shoot={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":32,"echo":false,"script":null)
 ]
 }
+pause={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
+environment/defaults/default_clear_color=Color(0, 0.00392157, 0.0156863, 1)

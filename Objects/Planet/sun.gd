@@ -22,11 +22,12 @@ var damaging_player := false
 func _process(delta: float) -> void:
 	$Area2D/Sprite2D2.rotation += 0.05 * delta
 	if damaging_player:
-		player.hurt(sun_damage * delta)
+		player.hurt(sun_damage * delta, true)
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if !body.is_in_group(&"Player"):
 		return
+	$AudioStreamPlayer.play()
 	GameState.dialog_request(GameState.actors.ShipBoard, sun_warnings[randi() % sun_warnings.size()])
 	sun_proximity.emit(true)
 	player = body
@@ -35,6 +36,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if !body.is_in_group(&"Player"):
 		return
+	$AudioStreamPlayer.stop()
 	sun_proximity.emit(false)
 	damaging_player = false
 

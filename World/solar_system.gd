@@ -21,3 +21,6 @@ func _ready() -> void:
 	GameState.dialog_request(GameState.actors.ShipBoard, "You can accept or deny the job with Y/N keys")
 	GameState.dialog_request(GameState.actors.ShipBoard, "Be careful! Rejecting jobs or letting them expire...")
 	GameState.dialog_request(GameState.actors.ShipBoard, "will be counted against you! 5 strikes and it's gameover!")
+	GameState.dialog_request(GameState.actors.ShipBoard, "You normally have a short window to accept,")
+	GameState.dialog_request(GameState.actors.ShipBoard, "but go ahead and take some time to look this one over.")
+	GameState.dialog_request(GameState.actors.ShipBoard, "Good luck!")

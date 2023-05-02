@@ -13,6 +13,8 @@ signal job_accepted(job)
 @onready var destination_number: Label = %DestinationNumber
 @onready var timer: Timer = $Timer
 @onready var status_label: Label = %StatusLabel
+@onready var payout: Label = %Payout
+@onready var size_indicator: VBoxContainer = %SizeIndicator
 
 var job : JobManager.Job
 
@@ -25,8 +27,12 @@ func setup(_job) -> void:
 	destination.texture = load(job.destination.planet_image)
 	destination_number.text = "%s" % job.destination.planet_number
 	time_left = job.accept_time
+	for child in size_indicator.get_children():
+		child.visible = child.get_index() < job.size
+	payout.text = "$%s" % str(job.payout)
 	job.listing = self
 	timer.start(time_left)
+	
 
 func _ready() -> void:
 	stylebox = time_display.get_theme_stylebox(&"fill").duplicate()

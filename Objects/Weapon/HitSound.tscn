@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cofruwr6qsjqc"]
+
+[ext_resource type="AudioStream" uid="uid://b4uds5h58q0e4" path="res://Assets/Sounds/MiniHit.wav" id="1_qs0yd"]
+
+[sub_resource type="GDScript" id="GDScript_vc80k"]
+script/source = "extends AudioStreamPlayer2D
+
+func _on_finished() -> void:
+	queue_free()
+"
+
+[node name="HitSound" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_qs0yd")
+volume_db = -5.0
+autoplay = true
+script = SubResource("GDScript_vc80k")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

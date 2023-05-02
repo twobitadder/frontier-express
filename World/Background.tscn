@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddn2d7q385rot"]
+
+[ext_resource type="Texture2D" uid="uid://cnl3gmpqlsfbk" path="res://Assets/SpaceShooter/stars.png" id="1_2fgbj"]
+[ext_resource type="PackedScene" uid="uid://dufidm0akarj" path="res://World/Nebula.tscn" id="2_8c8ia"]
+
+[sub_resource type="Gradient" id="Gradient_sibtq"]
+interpolation_mode = 2
+colors = PackedColorArray(0, 0.0625, 0.030611, 1, 0, 0.0449677, 0.105469, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6vyfg"]
+gradient = SubResource("Gradient_sibtq")
+width = 2000
+height = 2000
+fill_from = Vector2(0.465217, 0.165217)
+fill_to = Vector2(0.86087, 1)
+
+[node name="Background" type="ParallaxBackground"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+z_index = -2
+motion_offset = Vector2(2000, 2000)
+motion_mirroring = Vector2(1, 1)
+
+[node name="BaseColor" type="Sprite2D" parent="ParallaxLayer"]
+texture = SubResource("GradientTexture2D_6vyfg")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="."]
+z_index = -2
+motion_scale = Vector2(0.77, 0.77)
+motion_mirroring = Vector2(2000, 2000)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer3"]
+texture = ExtResource("1_2fgbj")
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="."]
+z_index = -2
+motion_scale = Vector2(0.8, 0.8)
+motion_mirroring = Vector2(2000, 2000)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer4"]
+self_modulate = Color(1, 1, 1, 0.14902)
+texture = ExtResource("1_2fgbj")
+flip_h = true
+flip_v = true
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+z_index = -2
+motion_scale = Vector2(0.95, 0.95)
+motion_mirroring = Vector2(2000, 2000)
+
+[node name="Nebula" parent="ParallaxLayer2" instance=ExtResource("2_8c8ia")]
+nebula_1_color = Color(0.509804, 0.0352941, 0.333333, 0.270588)
+nebula_2_color = Color(0.615686, 0.317647, 0.498039, 0.243137)

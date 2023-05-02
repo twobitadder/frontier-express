@@ -2,6 +2,21 @@ extends Node
 
 signal enemies_spawning
 
+const MIN_SPAWN_MIN := 10.0
+const MIN_SPAWN_MAX := 50.0
+const MAX_SPAWN_MIN := 30.0
+const MAX_SPAWN_MAX := 60.0
+
+const enemies_spawned_messages = [
+	"Got some drones incoming!",
+	"Bogies pinged on radar",
+	"Got more fun incoming!",
+	"It's getting a little busier!",
+	"Hope your trigger finger is warmed up!",
+	"More drones? Uuuugh",
+	"Oh good I felt like getting shot at"
+]
+
 var enemy_scene = preload("res://Objects/Enemy/Enemy.tscn")
 
 @export var min_enemy := 2
@@ -21,8 +36,9 @@ func setup_enemy():
 	enemies_spawning.emit()
 	enemy_spawners.shuffle()
 	var spawn_point = enemy_spawners.front()
+	GameState.dialog_request(GameState.actors.ShipBoard, enemies_spawned_messages[randi() % enemies_spawned_messages.size()])
+	$AudioStreamPlayer.play()
 	for i in randi_range(min_enemy, max_enemy):
-		print("spawning enemy %s" % str(i))
 		var enemy = enemy_scene.instantiate()
 		enemy.manager = self
 		enemy_container.add_child(enemy)
@@ -38,7 +54,9 @@ func setup_enemy():
 
 func _on_timer_timeout() -> void:
 	setup_enemy()
-	timer.start(randf_range(10, 30))
+	var min_spawn = remap(GameState.time_counter, 0.0, GameState.MAX_DIFFICULTY_TIME_LIMIT, MIN_SPAWN_MAX, MIN_SPAWN_MIN)
+	var max_spawn = remap(GameState.time_counter, 0.0, GameState.MAX_DIFFICULTY_TIME_LIMIT, MAX_SPAWN_MAX, MAX_SPAWN_MIN)
+	timer.start(randf_range(min_spawn, max_spawn))
 
 func cleanup(enemy) -> void:
 	if !enemies.has(enemy):

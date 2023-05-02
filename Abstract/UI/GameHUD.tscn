@@ -344,7 +344,7 @@ text = "Resume"
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 0
-text = "Quit"
+text = "Main Menu"
 
 [node name="PlayerInfo" type="HBoxContainer" parent="."]
 process_mode = 1
@@ -401,6 +401,7 @@ value = 100.0
 show_percentage = false
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="PlayerInfo/VBoxContainer/HBoxContainer/ShipStatus/MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="PlayerInfo/VBoxContainer/HBoxContainer/ShipStatus/MarginContainer/VBoxContainer/HBoxContainer2"]

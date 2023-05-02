@@ -5,6 +5,8 @@ signal money_updated(money)
 signal new_dialog(actor, dialog)
 signal gameover
 
+const MAX_DIFFICULTY_TIME_LIMIT = 600.0
+
 #lol the values and keys are the same so this data is autocompleted
 const actors = {
 	"Cornucopia" : "Cornucopia",
@@ -28,6 +30,7 @@ var strikes : int = 5:
 		strikes = value
 		if strikes == 0:
 			gameover.emit()
+			SceneHandler.change_scene("Game Over")
 
 var money : int = 0:
 	get:
@@ -39,8 +42,10 @@ var money : int = 0:
 
 var pending_dialog := Array()
 var processing_dialog := false
+var time_counter := 0.0
 
-func _process(_delta) -> void:
+func _process(delta) -> void:
+	time_counter += delta
 	if pending_dialog.size() > 0 && !processing_dialog:
 		processing_dialog = true
 		new_dialog.emit(pending_dialog.front().actor, pending_dialog.front().dialog)
@@ -54,3 +59,10 @@ func dialog_request(actor, dialog) -> void:
 	dialog_object.actor = actor
 	dialog_object.dialog = dialog
 	pending_dialog.append(dialog_object)
+
+func reset() -> void:
+	pending_dialog.clear()
+	processing_dialog = false
+	time_counter = 0.0
+	money = 0
+	strikes = 5

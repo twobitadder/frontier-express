@@ -39,6 +39,10 @@ func _ready() -> void:
 	jobs_list.position = jobs_positions.inactive
 	comms.position = comms_positions.inactive
 
+func _process(_delta) -> void:
+	if Input.is_action_just_pressed("pause"):
+		pause(!get_tree().paused)
+
 func _on_money_updated(_money) -> void:
 	money.text = "$%s" % _money
 
@@ -92,7 +96,8 @@ func _on_resume_pressed() -> void:
 	pause(false)
 
 func _on_quit_pressed() -> void:
-	get_tree().quit()
+	get_tree().paused = true
+	SceneHandler.change_scene("Main Menu")
 
 func jobs_list_move(activate : bool) -> void:
 	var new_pos = jobs_positions.active if activate else jobs_positions.inactive
@@ -100,10 +105,6 @@ func jobs_list_move(activate : bool) -> void:
 	if activate:
 		pending_jobs_amt = 0
 		jobs_label.text = "Jobs"
-
-func comms_move(activate : bool) -> void:
-	var new_pos = comms_positions.active if activate else comms_positions.inactive
-	await create_tween().tween_property(comms, "position", new_pos, 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT).finished
 
 func incoming_job(job) -> void:
 	pending_jobs_amt += 1
@@ -131,7 +132,7 @@ func _on_dialog_request(_actor, _dialog) -> void:
 	actor.play(_actor)
 	dialog.visible_ratio = 0.0
 	dialog.text = _dialog
-	await create_tween().tween_property(dialog, "visible_ratio", 1.0, 1.0).finished
+	await create_tween().tween_property(dialog, "visible_ratio", 1.0, 1.5).finished
 	await get_tree().create_timer(1.0).timeout
 	actor.play(GameState.actors["Harvard's End"])
 	await create_tween().tween_property(comms, "position", comms_positions.inactive, 0.5).set_trans(Tween.TRANS_CUBIC).finished

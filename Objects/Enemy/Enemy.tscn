@@ -1,7 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://dy1gjr8fehd1c"]
+[gd_scene load_steps=12 format=3 uid="uid://dy1gjr8fehd1c"]
 
 [ext_resource type="Script" path="res://Objects/Enemy/enemy.gd" id="1_ta20w"]
 [ext_resource type="Texture2D" uid="uid://kbr7ty0b2hqf" path="res://Assets/SpaceShooter/SpaceShooterAssetPack_Ships.png" id="1_yidog"]
+[ext_resource type="Material" uid="uid://c435fq7ei35ie" path="res://Assets/Particles/small_thrust.tres" id="3_4u6kq"]
+[ext_resource type="Material" uid="uid://6wqqyb0d6uqs" path="res://Assets/Particles/explosion_core.tres" id="4_lh2oy"]
+[ext_resource type="Texture2D" uid="uid://drdbncu2cf6ud" path="res://Assets/SpaceShooter/SpaceShooterAssetPack_Projectiles.png" id="5_dyhip"]
+[ext_resource type="Material" uid="uid://b5tyhefqegrhm" path="res://Assets/Particles/explosion_parts.tres" id="6_ksuis"]
+[ext_resource type="AudioStream" uid="uid://bh0xhhlssctpk" path="res://Assets/Sounds/DestroyMonster2.wav" id="7_1hkh8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f0raq"]
 size = Vector2(7.25, 6.75)
@@ -11,6 +16,10 @@ radius = 141.004
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_540ho"]
 radius = 22.0227
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_03d06"]
+atlas = ExtResource("5_dyhip")
+region = Rect2(25, 9, 6, 6)
 
 [node name="Enemy" type="Area2D" groups=["Enemies"]]
 collision_layer = 2
@@ -38,6 +47,48 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ProximityCheck"]
 shape = SubResource("CircleShape2D_540ho")
+
+[node name="ThrustParticles" type="Node2D" parent="."]
+
+[node name="ThrustPlusX" type="GPUParticles2D" parent="ThrustParticles"]
+position = Vector2(-3, 0)
+process_material = ExtResource("3_4u6kq")
+
+[node name="ThrustMinusX" type="GPUParticles2D" parent="ThrustParticles"]
+position = Vector2(3, 0)
+rotation = 3.14159
+process_material = ExtResource("3_4u6kq")
+
+[node name="ThrustPlusY" type="GPUParticles2D" parent="ThrustParticles"]
+position = Vector2(0, -3)
+rotation = 1.5708
+process_material = ExtResource("3_4u6kq")
+
+[node name="ThrustMinusY" type="GPUParticles2D" parent="ThrustParticles"]
+position = Vector2(0, 3)
+rotation = 4.71239
+process_material = ExtResource("3_4u6kq")
+
+[node name="DeathParticles" type="Node2D" parent="."]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="DeathParticles"]
+emitting = false
+amount = 3
+process_material = ExtResource("4_lh2oy")
+texture = SubResource("AtlasTexture_03d06")
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="DeathParticles"]
+emitting = false
+amount = 15
+process_material = ExtResource("6_ksuis")
+one_shot = true
+explosiveness = 1.0
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_1hkh8")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

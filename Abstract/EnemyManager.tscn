@@ -1,12 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://dqbxcds1q41iq"]
+[gd_scene load_steps=3 format=3 uid="uid://dqbxcds1q41iq"]
 
 [ext_resource type="Script" path="res://Abstract/enemy_manager.gd" id="1_so4nn"]
+[ext_resource type="AudioStream" uid="uid://d27crne7oqwpp" path="res://Assets/Sounds/ShotMeDown.wav" id="2_1mgt6"]
 
 [node name="EnemyManager" type="Node"]
 script = ExtResource("1_so4nn")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 60.0
 autostart = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_1mgt6")
+volume_db = -10.0
+pitch_scale = 0.7
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8m1s6hccn4uh"]
+
+[ext_resource type="Script" path="res://Abstract/scene_handler.gd" id="1_pcxel"]
+[ext_resource type="AudioStream" uid="uid://jxc7xrrvvvv1" path="res://Assets/Music/bgm_action_5.mp3" id="2_647k7"]
+
+[node name="SceneHandler" type="Node"]
+script = ExtResource("1_pcxel")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_647k7")
+volume_db = -10.0
+autoplay = true
