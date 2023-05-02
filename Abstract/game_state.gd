@@ -27,7 +27,7 @@ var strikes : int = 5:
 		return strikes
 	set(value):
 		strikes_updated.emit(value)
-		strikes = value
+		strikes = min(value, 5)
 		if strikes == 0:
 			gameover.emit()
 			SceneHandler.change_scene("Game Over")
@@ -39,6 +39,15 @@ var money : int = 0:
 		money_updated.emit(value)
 		money = value
 
+var completed_jobs : int = 0:
+	get:
+		return completed_jobs
+	set(value):
+		if value % 5 == 0:
+			strikes += 1
+			get_tree().get_first_node_in_group(&"Player").health += 20
+			dialog_request(actors.ShipBoard, "Good news! You've gained another chance with the system!")
+		completed_jobs = value
 
 var pending_dialog := Array()
 var processing_dialog := false
@@ -66,3 +75,4 @@ func reset() -> void:
 	time_counter = 0.0
 	money = 0
 	strikes = 5
+	completed_jobs = 0

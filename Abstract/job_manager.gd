@@ -145,6 +145,7 @@ func _on_job_ended(job) -> void:
 			spawn_sound(job_complete_sound)
 			active_job_list.erase(job)
 			job_completed.emit(job)
+			GameState.completed_jobs += 1
 			
 
 func _on_job_accepted(job) -> void:

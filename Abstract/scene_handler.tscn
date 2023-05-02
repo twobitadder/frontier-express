@@ -4,6 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://jxc7xrrvvvv1" path="res://Assets/Music/bgm_action_5.mp3" id="2_647k7"]
 
 [node name="SceneHandler" type="Node"]
+process_mode = 3
 script = ExtResource("1_pcxel")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

@@ -49,7 +49,7 @@ var shot_resource = preload("res://Assets/Sounds/LaserAttackMini.wav")
 		return health
 	set(value):
 		health_changed.emit(health)
-		health = value
+		health = min(value, 100.0)
 		if health <= 0.0:
 			die()
 			dead.emit()

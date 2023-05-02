@@ -1,5 +1,17 @@
 extends Node
 
+var music_enabled := true:
+	get:
+		return music_enabled
+	set(value):
+		if value:
+			$AudioStreamPlayer.stream = scenes["Main Menu"][1]
+			$AudioStreamPlayer.play()
+		elif !value:
+			$AudioStreamPlayer.stop()
+		music_enabled = value
+
+var current_scene := "Main Menu"
 
 const scenes = {
 	"Main Menu" : [preload("res://Abstract/UI/MainMenu.tscn"), preload("res://Assets/Music/bgm_action_5.mp3")],
@@ -9,7 +21,8 @@ const scenes = {
 }
 
 func change_scene(scene_name) -> void:
+	current_scene = scene_name
 	get_tree().change_scene_to_packed(scenes[scene_name][0])
-	if $AudioStreamPlayer.stream != scenes[scene_name][1]:
+	if $AudioStreamPlayer.stream != scenes[scene_name][1] && music_enabled:
 		$AudioStreamPlayer.stream = scenes[scene_name][1]
 		$AudioStreamPlayer.play()

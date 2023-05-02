@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ddn2d7q385rot" path="res://World/Background.tscn" id="2_6p3s0"]
 
 [node name="ColorRect" type="ColorRect"]
+process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -56,6 +57,10 @@ layout_mode = 2
 text = "Start
 "
 
+[node name="MusicToggle" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Music Enabled"
+
 [node name="Credits" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Credits
@@ -71,5 +76,6 @@ text = "Exit
 [node name="Background" parent="CanvasLayer" instance=ExtResource("2_6p3s0")]
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MusicToggle" to="." method="_on_music_toggle_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

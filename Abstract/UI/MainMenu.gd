@@ -11,3 +11,11 @@ func _on_credits_pressed() -> void:
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_music_toggle_pressed() -> void:
+	SceneHandler.music_enabled = !SceneHandler.music_enabled
+	if SceneHandler.music_enabled:
+		$MarginContainer/VBoxContainer/MusicToggle.text = "Music Enabled"
+	elif !SceneHandler.music_enabled:
+		$MarginContainer/VBoxContainer/MusicToggle.text = "Music Disabled"

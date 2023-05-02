@@ -4,6 +4,7 @@
 [ext_resource type="FontFile" uid="uid://bfr6jp74u3gpi" path="res://Assets/ttf/SuperTechnology.ttf" id="1_xpfcj"]
 
 [node name="GameOver" type="MarginContainer"]
+process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
