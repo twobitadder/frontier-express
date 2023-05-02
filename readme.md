@@ -1,4 +1,4 @@
-#Welcome!
+Welcome!
 
 This is my entry for Ludum Dare 53, theme "Delivery." Made with Godot 4.0.2. 
 
